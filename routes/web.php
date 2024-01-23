@@ -31,9 +31,13 @@ Route::get('/member/lottery', function() {
     return view('member.lottery');
 })->middleware(['auth', 'role:member', 'smarty'])->name('member.lottery');
 
-Route::get('/member/results', function() {
-    return view('member.results');
-})->middleware(['auth', 'role:member', 'smarty'])->name('member.results');
+Route::post('/member/getwinners',[WinnersController::class, 'getwinners'])
+->middleware(['auth', 'role:member', 'smarty'])
+->name('member.getluck');
+
+Route::resource('/member/results', WinnersController::class)
+->only(['index'])
+->middleware(['auth', 'role:member', 'smarty']);
 
 Route::get('/admin/dashboard', function() {
     return view('admin.dashboard');

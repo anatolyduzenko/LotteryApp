@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Winner;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Output\StreamOutput;
 
 class WinnersController extends Controller
 {
@@ -18,17 +19,26 @@ class WinnersController extends Controller
         function($ticket){
             $ticket->with(['user'])->get();
         }])->get();
-        return view('admin.winners', ['winners' => $winners]);
+       
+        if(auth()->user()->role == 'admin') {
+            return view('admin.winners', ['winners' => $winners]);
+        } else {
+            return view('member.results', ['winners' => $winners]);
+        }
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Launch Fortune wheel.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function getwinners()
     {
-        //
+        \ob_start();
+        $stream = fopen("php://output", "w");
+        \Artisan::call('lottery:proceed', [],  new StreamOutput($stream));
+        $output = \ob_get_clean();
+        return response()->json($output);
     }
+
 }

@@ -46,18 +46,25 @@ class GetWinners extends Command
             ->shuffle();
         
         $award = $this->calculateAwardAmount($tickets_winners->count());
-
+        
         if(isset($award)) {
-            $tickets_winners->each(function($ticket) {
+            $tickets_winners->each(function($ticket) use ($award) {
                 $winner = new Winner();
                 $winner->drawing_date = $ticket->drawing_date;
                 $winner->ticket_id = $ticket->id;
+                $winner->amount = $award;
                 $winner->save();
             });
-            echo "Winners: ".$tickets_winners->count()."\n";
-        } else {
-            echo "No winners :(\n";
-        }
+        } 
+
+        $numbers = $tickets_winners->mapWithKeys(function ($item, $key) {
+            return [$key => $item['number']];
+        });
+        
+        echo json_encode([
+            'winners' => $numbers, 
+            'total_winners' => $tickets_winners->count()
+        ]);
     }
 
     private function calculateAwardAmount($numWinners) {

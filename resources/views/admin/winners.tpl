@@ -7,7 +7,7 @@
             <table id="tickets-table" class="w-100">
                 <thead>
                     <tr>
-                        <th>Ticked ID</th>
+                        <th>Ticket ID</th>
                         <th>Drawing Date</th>
                         <th>Ticket Number</th>
                         <th>Winner Name</th>

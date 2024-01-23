@@ -15,9 +15,9 @@
                 <tbody>
                     {foreach from=$tickets item=ticket}
                         <tr>
-                            <td>{$ticket->id}</td>
-                            <td>{$ticket->drawing_date|date_format: 'm-d-Y'}</td>
-                            <td>{$ticket->number}</td>
+                            <td>{$ticket.id}</td>
+                            <td>{$ticket.drawing_date|date_format: 'm-d-Y'}</td>
+                            <td>{$ticket.number}</td>
                         </tr>
                     {/foreach}
                 </tbody>
