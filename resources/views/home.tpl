@@ -3,25 +3,22 @@
 {block name=contents}
 	<h1 class="form-signin-heading">Welcome to the Lottery!</h1>
     <div id="lottery-container">
-        <h2>Our latest winners!</h2>
-        <table id="results-table" class="w-100">
-            <thead>
-                <tr>
-                    <th>Winner Name</th>
-                    <th>Drawing Date</th>
-                    <th>Ticket Number</th>
-                </tr>
-            </thead>
-            <tbody>
-                {* Loop through winners data *}
-                {foreach from=$winners item=winner}
-                    <tr>
-                        <td>{$winner.name}</td>
-                        <td>{$winner.date_drawing}</td>
-                        <td>{$winner.amount}</td>
-                    </tr>
-                {/foreach}
-            </tbody>
-        </table>
+        <div id="spinner">
+            {if $guest}
+                <img class="" src="/images/spinner-win.png" />
+            {else}
+                <a href="{route('member.lottery')}">
+                    <img class="" src="/images/spinner-win.png" />
+                </a>
+            {/if}
+        </div>
+        {if $guest }   
+            <div class="py-3">
+                <a class="btn btn-lg btn-primary" href="{route('register')}">Register</a>
+                or 
+                <a class="btn btn-lg btn-primary" href="{route('login')}">Login</a>
+                now and Try Your Luck!
+            </div>
+        {/if}
     </div>
 {/block}

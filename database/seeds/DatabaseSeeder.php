@@ -11,8 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        ini_set('memory_limit', -1);
         $this->call([
-            UsersSeeder::class
+            UsersSeeder::class,
+            TicketsSeeder::class
         ]);
     }
 }

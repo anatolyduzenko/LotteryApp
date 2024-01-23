@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ticket extends Model
+class Winner extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class Ticket extends Model
      * @var array
      */
     protected $fillable = [
-        'number', 'drawing_date', 'user_id',
+        'drawing_date', 'ticket_id',
     ];
 
     /**
@@ -32,8 +32,8 @@ class Ticket extends Model
         'drawing_date' => 'date',
     ];
     
-    public function user()
+    public function ticket()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Ticket');
     }
 }

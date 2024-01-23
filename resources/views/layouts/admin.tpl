@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/custom.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 	<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -32,18 +31,23 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-
-                </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="{route('tickets.index')}">Tickets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{route('winners.index')}">Winners</a>
+                </li>
+            </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     {if $guest eq 'guest'}
                         <li class="nav-item">
-                            <a class="nav-link" href="/login">Login</a>
+                            <a class="nav-link" href="{route('login')}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/register">Register</a>
+                            <a class="nav-link" href="{route('register')}">Register</a>
                         </li>
                     {else}
                         <li class="nav-item dropdown">
@@ -52,13 +56,13 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/logout"
+                                <a class="dropdown-item" href="{route('logout')}"
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
 
-                                <form id="logout-form" action="/logout" method="POST" style="display: none;">
+                                <form id="logout-form" action="{route('logout')}" method="POST" style="display: none;">
                                     {$csrf_field}
                                 </form>
                             </div>
@@ -67,8 +71,8 @@
                 </ul>
             </div>
         </div>
-    </nav>
-    <div class="py-5">         
+    </nav>    
+    <div class="py-3">        
 	    {block name=contents}{/block}
     </div>
 </div>

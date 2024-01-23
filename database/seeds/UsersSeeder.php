@@ -20,9 +20,22 @@ class UsersSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
-        factory(App\User::class, 40000)->create()->each(function ($user) {
-            $user->tickets()->saveMany(factory(App\Ticket::class, 10)->make());
-        });
-        
+        DB::table('users')->insert([
+            'name' => 'Dr. Cyrus Streich',
+            'id' => 2,
+            'email' => 'hblock@example.net',
+            'role' => 'member',
+            'password' => bcrypt('password'),
+        ]);
+
+        for ($i=0; $i < 1000; $i++) { 
+            factory(App\User::class, 1000)->create()->each(function ($user) {
+                $user->tickets()
+                    ->saveMany(
+                        factory(App\Ticket::class, rand(1, 10))
+                        ->make()
+                    );
+            });
+        }
     }
 }

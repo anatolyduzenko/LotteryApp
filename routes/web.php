@@ -12,12 +12,14 @@
 */
 
 use App\Http\Controllers\LotteryController;
+use App\Http\Controllers\TicketsController;
+use App\Http\Controllers\WinnersController;
 
 Route::get('/', function () {
     return view('home');
 })->middleware(['smarty']);
 
-Route::namespace('App\Http\Controllers')->group(function () {
+Route::group(['namespace' =>'App\Http\Controllers', 'middleware' =>['smarty']], function () {
     Auth::routes();
 });
 
@@ -37,4 +39,11 @@ Route::get('/admin/dashboard', function() {
     return view('admin.dashboard');
 })->middleware(['auth', 'role:admin', 'smarty'])->name('admin.dashboard');
 
+Route::resource('/admin/tickets', TicketsController::class)
+->only(['index', 'create', 'store', 'destroy'])
+->middleware(['auth', 'role:admin', 'smarty']);
+
+Route::resource('/admin/winners', WinnersController::class)
+->only(['index', 'destroy'])
+->middleware(['auth', 'role:admin', 'smarty']);
 

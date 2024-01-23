@@ -22,6 +22,8 @@ class AddSmartyVars
         } else {
             FacadesView::share('guest', 'guest');
         }
+        FacadesView::share('csrf_token', csrf_token());
+        FacadesView::share('csrf_field', csrf_field());
         return $next($request);
     }
 }
