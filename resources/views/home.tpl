@@ -1,12 +1,8 @@
 {extends file='layouts/smarty.tpl'}
 {block name=title}Welcome to the Lottery!{/block}
 {block name=contents}
-    <h1 class="form-signin-heading py=10">Next Lottery starts at {$next_date}!</h1>
+	<h1 class="form-signin-heading">Welcome to the Lottery!</h1>
     <div id="lottery-container">
-        <div id="spinner">
-            {* Spinner placeholder *}
-            <img class="" src="/images/spinner.png" />
-        </div>
         <h2>Our latest winners!</h2>
         <table id="results-table" class="w-100">
             <thead>

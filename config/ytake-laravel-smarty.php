@@ -26,7 +26,7 @@ return [
     'extension'                           => 'tpl',
 
     //
-    'debugging'                           => env('SMARTY_DEBUG', false),
+    'debugging'                           => env('SMARTY_DEBUG', true),
 
     // use cache
     'caching'                             => env('SMARTY_CACHING', false),

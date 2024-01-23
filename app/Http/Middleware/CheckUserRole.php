@@ -15,7 +15,7 @@ class CheckUserRole
      */
     public function handle($request, Closure $next, String $role)
     {
-        if(auth()->user->role !== $role) {
+        if(auth()->user()->role !== $role) {
             return redirect()->route('lottery');
         }
         return $next($request);

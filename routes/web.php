@@ -14,22 +14,27 @@
 use App\Http\Controllers\LotteryController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+})->middleware(['smarty']);
+
+Route::namespace('App\Http\Controllers')->group(function () {
+    Auth::routes();
 });
 
-Auth::routes();
-
+Route::get('/lottery', LotteryController::class)
+    ->middleware(['auth'])
+    ->name('lottery');
 
 Route::get('/member/lottery', function() {
     return view('member.lottery');
-})->middleware(['auth', 'role:member'])->name('member.lottery');
+})->middleware(['auth', 'role:member', 'smarty'])->name('member.lottery');
 
 Route::get('/member/results', function() {
     return view('member.results');
-})->middleware(['auth', 'role:member'])->name('member.results');
+})->middleware(['auth', 'role:member', 'smarty'])->name('member.results');
 
 Route::get('/admin/dashboard', function() {
-    return view('admin.lottery');
-})->middleware(['auth', 'role:admin'])->name('admin.dashboard');
+    return view('admin.dashboard');
+})->middleware(['auth', 'role:admin', 'smarty'])->name('admin.dashboard');
 
-// Route::get('/admin/lottery', LotteryController::class)->middleware(['auth', 'role:admin'])->name('admin.lottery');
+

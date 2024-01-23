@@ -160,6 +160,8 @@ return [
         Illuminate\Session\SessionServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
+        Ytake\LaravelSmarty\SmartyServiceProvider::class, 
+        Ytake\LaravelSmarty\SmartyConsoleServiceProvider::class, 
         Illuminate\View\ViewServiceProvider::class,
 
         /*
@@ -175,10 +177,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         
-        // add smarty extension
-        Ytake\LaravelSmarty\SmartyServiceProvider::class, 
-        // add artisan commands  
-        Ytake\LaravelSmarty\SmartyConsoleServiceProvider::class, 
     ],
 
     /*
@@ -229,7 +227,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
     ],
 
 ];
