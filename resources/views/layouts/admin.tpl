@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{$csrf_token}">
     <script src="/js/app.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<title>{block name=title}default{/block}</title>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -36,6 +37,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{route('winners.index')}">Winners</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-link" id="run-lottery">Run Lottery Now!</button>
                 </li>
             </ul>
 
@@ -76,6 +80,31 @@
 	    {block name=contents}{/block}
     </div>
 </div>
-{block name=scripts}{/block}
+{block name=scripts}
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('#run-lottery').click(function() {
+                $('#spinner').addClass('rotate-center');
+                $.ajax({
+                    url: '{route('admin.getwinners')}', // Replace with your server endpoint
+                    type: 'POST',
+                    contentType: 'application/json',
+                    success: function(response) {
+                        window.location = "{route('winners.index')}";
+                        console.log('Response:', JSON.parse(response));
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                 });
+            });
+        });
+    </script>
+{/block}
 </body>
 </html>

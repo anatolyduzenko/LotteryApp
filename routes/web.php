@@ -55,3 +55,6 @@ Route::resource('/admin/winners', WinnersController::class)
     ->only(['index', 'destroy'])
     ->middleware(['auth', 'role:admin', 'smarty']);
 
+Route::post('/admin/getwinners',[WinnersController::class, 'getwinners'])
+    ->middleware(['auth', 'role:admin', 'smarty'])
+    ->name('admin.getwinners');
