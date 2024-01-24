@@ -37,9 +37,11 @@ $(document).ready(function(){
             $('#spinner').removeClass('bounce');
             $('#spinner').addClass('rotate-center');
             clearInterval();
-            setTimeout(function() {
-                window.location = window.targetLocation;
-            }, 3000);
+            if(typeof a === 'undefined') {
+                var a = setTimeout(function() {
+                    window.location = window.targetLocation;
+                }, 3000);
+            }
         } else {
             var millis = targetDate - date;
             var millisObject = convertMillis(millis);

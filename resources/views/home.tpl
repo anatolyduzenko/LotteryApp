@@ -2,6 +2,7 @@
 {block name=title}Welcome to the Lottery!{/block}
 {block name=contents}
 	<h1 class="form-signin-heading">Welcome to the Lottery!</h1>
+    <p>Click on the image to enter!</p>
     <div id="lottery-container">
         <div id="spinner">
             {if $guest}
