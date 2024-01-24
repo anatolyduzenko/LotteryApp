@@ -32,18 +32,18 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{route('tickets.index')}">Tickets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{route('winners.index')}">Winners</a>
-                </li>
-                <li class="nav-item">
-                    <button class="btn btn-link" id="run-lottery">Run Lottery Now!</button>
-                </li>
-            </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{route('tickets.index')}">Tickets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{route('winners.index')}">Winners</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-link" id="run-lottery">Run Lottery Now!</button>
+                    </li>
+                </ul>
 
-                <!-- Right Side Of Navbar -->
+                    <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     {if $guest eq 'guest'}

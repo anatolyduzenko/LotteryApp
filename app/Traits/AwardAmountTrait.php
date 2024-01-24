@@ -3,6 +3,11 @@ namespace App\Traits;
 
 trait AwardAmountTrait {
 
+    /**
+     * Get the prize depending on the number of winners.
+     *
+     * @return array
+     */
     private function calculateAwardAmount($numWinners) {
         if ($numWinners == 1) {
             return 20000;

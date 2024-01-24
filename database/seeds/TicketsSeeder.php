@@ -22,7 +22,7 @@ class TicketsSeeder extends Seeder
                 'drawing_date' => today()->format('Y-m-d')
             ]);
     
-            for ($i=3; $i < 1000000; $i++) { 
+            for ($i = 3; $i < 1000000; $i++) { 
                 factory(Ticket::class, rand(1, 3))->create([
                     'user_id' => $i
                 ]);

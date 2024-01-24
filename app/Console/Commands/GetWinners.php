@@ -10,6 +10,7 @@ use Illuminate\Console\Command;
 class GetWinners extends Command
 {
     use AwardAmountTrait;
+    
     /**
      * The name and signature of the console command.
      *
