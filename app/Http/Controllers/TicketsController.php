@@ -28,7 +28,8 @@ class TicketsController extends Controller
             return Str::contains($item->command, 'lottery:proceed');
         });
 
-        $next_draw_time = (count($matches)) ? $matches->first()->nextRunDate()->format('Y-m-d H:i:s') : false; 
+        $next_draw_time = (count($matches)) ? (int) round(
+            $matches->first()->nextRunDate()->format('Uu') / pow(10, 6 - 3)) : false; 
 
         if(auth()->user()->role == 'admin') {
             $tickets = Ticket::paginate(10);

@@ -4,7 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12 justify-content-center">
-            <table id="tickets-table" class="w-100">
+            <h1>Tickets list</h1>
+            <table id="tickets-table" class="table table-bordered table-hover table-light table-sm w-100">
                 <thead>
                     <tr>
                         <th>Ticket ID</th>

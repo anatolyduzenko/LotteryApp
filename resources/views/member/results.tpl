@@ -21,7 +21,7 @@
         {/if}
         <hr/>
         <h2>Today's Winners!!!</h2>
-        <table id="results-table" class="w-100">
+        <table id="results-table" class="table table-bordered table-hover table-light table-sm w-100">
             <thead>
                 <tr>
                     <th>Winner Name</th>

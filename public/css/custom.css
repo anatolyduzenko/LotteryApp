@@ -29,3 +29,41 @@
     }
   }
   
+/**
+ * ----------------------------------------
+ * animation jump
+ * ----------------------------------------
+ */
+  .animated { 
+    background-image: url(/images/spinner.png); 
+    background-repeat: no-repeat;
+    background-position: center top; 
+    padding-top: 400px;
+    margin-bottom:100px;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s; 
+    -webkit-animation-fill-mode: both; 
+    animation-fill-mode: both; 
+ }
+ 
+ @-webkit-keyframes bounce { 
+    0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
+    40% {-webkit-transform: translateY(-30px);} 
+    60% {-webkit-transform: translateY(-15px);} 
+ } 
+ 
+ @keyframes bounce { 
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+    40% {transform: translateY(-30px);} 
+    60% {transform: translateY(-15px);} 
+ }
+ 
+ .bounce { 
+    -webkit-animation-name: bounce; 
+    animation-name: bounce; 
+ }
+
+ body {
+  background: radial-gradient(rgba(52,144,220,.25), transparent);
+  height: 100vh;
+ }

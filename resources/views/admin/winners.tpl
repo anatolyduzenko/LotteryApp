@@ -3,8 +3,9 @@
 {block name=contents}
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <table id="tickets-table" class="w-100">
+        <h1>Winners List</h1>
+        <div class="col-md-12">
+            <table id="tickets-table" class="table table-bordered table-hover table-light table-sm w-100">
                 <thead>
                     <tr>
                         <th>Ticket ID</th>

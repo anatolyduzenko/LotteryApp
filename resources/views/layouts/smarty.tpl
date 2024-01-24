@@ -71,6 +71,7 @@
     <div class="py-5">         
 	    {block name=contents}{/block}
     </div>
+    <div id="footer" class="fixed-bottom py-3 bg-light  text-center">Copyright: {$smarty.now|date_format:"%Y"}</div>
 </div>
 {block name=scripts}{/block}
 </body>

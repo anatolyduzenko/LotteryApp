@@ -58,7 +58,7 @@ class GetWinners extends Command
         if(isset($award)) {
             $tickets_winners->each(function($ticket) use ($award) {
                 $winner = new Winner();
-                $winner->drawing_date = $ticket->drawing_date;
+                $winner->drawing_date = $ticket->drawing_date->format('Y-m-d');
                 $winner->ticket_id = $ticket->id;
                 $winner->amount = $award;
                 $winner->save();

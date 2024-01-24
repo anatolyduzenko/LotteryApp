@@ -4,7 +4,13 @@
     
     <h1 class="form-signin-heading py=10">Spin the Fortune wheel!</h1>
     {if $next_draw_time}
-        <h2>Next lottery at {$next_draw_time}</h2>
+        <h2>
+            Next lottery round starts in
+            <!-- {$next_draw_time}  -->
+            <span class="tl-h"></span> Hours 
+            <span class="tl-m"></span> Minutes 
+            <span class="tl-s"></span> Seconds
+        </h2>
     {/if}
     {foreach from=$errors->all() item=error} 
         <div class="alert alert-danger">
@@ -24,13 +30,13 @@
     <div>- or -</div>
     <a class="btn btn-success btn-lg" href="{route('member.winners')}">Check the results</a>
     <div id="lottery-container">
-        <div id="spinner">
-            <img class="" src="/images/spinner.png" />
+        <div id="spinner" class="animated">
+            <!-- img class="" src="/images/spinner.png" --/ -->
         </div>
         <hr/>
         {if $tickets|@count gt 0}
             <h2>My upcoming tickets!</h2>
-            <table id="results-table" class="w-100">
+            <table id="results-table" class="table table-bordered table-hover table-light table-sm w-100">
                 <thead>
                     <tr>
                         <th>Drawing Date</th>
@@ -61,9 +67,14 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+            
+            window.targetDate = {$next_draw_time};
+            window.targetLocation = '{route('member.winners')}';
+            // Bounce
             $('#get-my-luck').click(function() {
-                $('#spinner').addClass('rotate-center');
+                $('#spinner').addClass('bounce');
             });
         });
     </script>
+    <script src="/js/timer.js"></script>
 {/block}

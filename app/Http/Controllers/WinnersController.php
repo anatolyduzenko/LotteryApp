@@ -22,7 +22,7 @@ class WinnersController extends Controller
                     $ticket->with(['user'])->get();
                 }
             ])->get();
-       
+    
         if(auth()->user()->role == 'admin') {
             return view('admin.winners', ['winners' => $winners]);
         } else {
@@ -38,7 +38,7 @@ class WinnersController extends Controller
     public function winners()
     {
         $winners = Winner::where([
-                'drawing_date' => today()->format('Y-m-d 00:00:00')
+                'drawing_date' => today()->format('Y-m-d')
             ])
             ->with([
                 'ticket' =>
@@ -46,6 +46,8 @@ class WinnersController extends Controller
                         $ticket->with(['user'])->get();
                     }
             ])
+            ->latest()
+            ->limit(15)
             ->get();
         
         $tickets = Ticket::where('user_id', auth()->user()->id)
