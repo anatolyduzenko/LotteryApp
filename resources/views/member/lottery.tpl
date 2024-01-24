@@ -1,29 +1,56 @@
 {extends file='layouts/smarty.tpl'}
 {block name=title}Welcome to the Lottery!{/block}
 {block name=contents}
+    
     <h1 class="form-signin-heading py=10">Spin the Fortune wheel!</h1>
-    <button class="btn btn-success btn-lg" id="get-my-luck">Get My Luck NOW!</button>
+    {if $next_draw_time}
+        <h2>Next lottery at {$next_draw_time}</h2>
+    {/if}
+    {foreach from=$errors->all() item=error} 
+        <div class="alert alert-danger">
+            {$error}
+        </div>
+    {/foreach}
+    <form method="post" action="{route('member.placeticket')}">
+        <legend>You can add your tickets here.</legend>
+        <label for="date">Drawing Date:</label>
+        <input type="date" name="date" id="date" required></input>    
+        <label for="ticket_number">Ticket Number:</label>
+        <input type="text" name="ticket_number" id="ticket_number" required></input>
+        {$csrf_field}
+        <button type="submit" class="btn btn-primary btn-md" id="get-my-luck">Register Ticket!</button>
+    </form>
+    
+    <div>- or -</div>
+    <a class="btn btn-success btn-lg" href="{route('member.winners')}">Check the results</a>
     <div id="lottery-container">
         <div id="spinner">
             <img class="" src="/images/spinner.png" />
         </div>
-        <h2>My playing tickets!</h2>
-        <table id="results-table" class="w-100">
-            <thead>
-                <tr>
-                    <th>Drawing Date</th>
-                    <th>Ticket Number</th>
-                </tr>
-            </thead>
-            <tbody>
-                {foreach from=$tickets item=ticket}
+        <hr/>
+        {if $tickets|@count gt 0}
+            <h2>My upcoming tickets!</h2>
+            <table id="results-table" class="w-100">
+                <thead>
                     <tr>
-                        <td>{$ticket.date_drawing}</td>
-                        <td>{$ticket.number}</td>
+                        <th>Drawing Date</th>
+                        <th>Ticket Number</th>
                     </tr>
-                {/foreach}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {foreach from=$tickets item=ticket}
+                        <tr>
+                            <td>{$ticket.drawing_date|date_format: '%d/%m/%Y'}</td>
+                            <td>{$ticket.number}</td>
+                        </tr>
+                    {/foreach}
+                </tbody>
+            </table>    
+        {else}
+            <div class="">
+                <h1>You don't have any upcoming tickets!</h1>
+            </div>
+        {/if}
     </div>
 {/block}
 {block name=scripts}
@@ -36,18 +63,6 @@
             });
             $('#get-my-luck').click(function() {
                 $('#spinner').addClass('rotate-center');
-                $.ajax({
-                    url: '{route('member.getluck')}', // Replace with your server endpoint
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({ name: name }),
-                    success: function(response) {
-                        console.log('Response:', JSON.parse(response));
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error:', error);
-                    }
-            });
             });
         });
     </script>

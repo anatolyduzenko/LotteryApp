@@ -13,12 +13,12 @@
             {/if}
         </div>
         {if $guest }   
-            <div class="py-3">
+            <h2 class="py-3">
                 <a class="btn btn-lg btn-primary" href="{route('register')}">Register</a>
                 or 
                 <a class="btn btn-lg btn-primary" href="{route('login')}">Login</a>
                 now and Try Your Luck!
-            </div>
+            </h2>
         {/if}
     </div>
 {/block}

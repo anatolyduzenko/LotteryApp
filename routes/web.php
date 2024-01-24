@@ -27,27 +27,31 @@ Route::get('/lottery', LotteryController::class)
     ->middleware(['auth'])
     ->name('lottery');
 
-Route::get('/member/lottery', function() {
-    return view('member.lottery');
-})->middleware(['auth', 'role:member', 'smarty'])->name('member.lottery');
+Route::get('/member/lottery', [TicketsController::class, 'index'])
+    ->middleware(['auth', 'role:member', 'smarty'])
+    ->name('member.lottery');
 
-Route::post('/member/getwinners',[WinnersController::class, 'getwinners'])
-->middleware(['auth', 'role:member', 'smarty'])
-->name('member.getluck');
+Route::post('/member/placeticket',[TicketsController::class, 'placetickets'])
+    ->middleware(['auth', 'role:member', 'smarty'])
+    ->name('member.placeticket');
+
+Route::get('/member/winners',[WinnersController::class, 'winners'])
+    ->middleware(['auth', 'role:member', 'smarty'])
+    ->name('member.winners');
 
 Route::resource('/member/results', WinnersController::class)
-->only(['index'])
-->middleware(['auth', 'role:member', 'smarty']);
+    ->only(['index'])
+    ->middleware(['auth', 'role:member', 'smarty']);
 
 Route::get('/admin/dashboard', function() {
     return view('admin.dashboard');
 })->middleware(['auth', 'role:admin', 'smarty'])->name('admin.dashboard');
 
 Route::resource('/admin/tickets', TicketsController::class)
-->only(['index', 'create', 'store', 'destroy'])
-->middleware(['auth', 'role:admin', 'smarty']);
+    ->only(['index', 'destroy'])
+    ->middleware(['auth', 'role:admin', 'smarty']);
 
 Route::resource('/admin/winners', WinnersController::class)
-->only(['index', 'destroy'])
-->middleware(['auth', 'role:admin', 'smarty']);
+    ->only(['index', 'destroy'])
+    ->middleware(['auth', 'role:admin', 'smarty']);
 

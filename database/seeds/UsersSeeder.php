@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -23,19 +24,13 @@ class UsersSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Dr. Cyrus Streich',
             'id' => 2,
-            'email' => 'hblock@example.net',
+            'email' => 'hblock@nfxl.com',
             'role' => 'member',
             'password' => bcrypt('password'),
         ]);
-
-        for ($i=0; $i < 1000; $i++) { 
-            factory(App\User::class, 1000)->create()->each(function ($user) {
-                $user->tickets()
-                    ->saveMany(
-                        factory(App\Ticket::class, rand(1, 10))
-                        ->make()
-                    );
-            });
+        
+        for ($i=0; $i < 10; $i++) { 
+            factory(App\User::class, 100)->create();
         }
     }
 }

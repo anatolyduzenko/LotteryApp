@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Winner extends Model
 {
+    public $timestamps = true;
+    
     /**
      * The attributes that are mass assignable.
      *

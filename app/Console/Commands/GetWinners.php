@@ -4,10 +4,12 @@ namespace App\Console\Commands;
 
 use App\Ticket;
 use App\Winner;
+use App\Traits\AwardAmountTrait;
 use Illuminate\Console\Command;
 
 class GetWinners extends Command
 {
+    use AwardAmountTrait;
     /**
      * The name and signature of the console command.
      *
@@ -40,6 +42,12 @@ class GetWinners extends Command
     public function handle()
     {
         $tickets_winners = Ticket::whereDate('drawing_date', today()->format('Y-m-d'))
+            ->whereNotIn(
+                'id', 
+                Winner::whereDate(
+                    'drawing_date', 
+                    today()->format('Y-m-d')
+                )->get(['ticket_id']))
             ->take(rand(1, 20))
             ->get()
             ->unique('user_id')
@@ -67,21 +75,4 @@ class GetWinners extends Command
         ]);
     }
 
-    private function calculateAwardAmount($numWinners) {
-        if ($numWinners == 1) {
-            return 20000;
-        } elseif ($numWinners <= 3) {
-            return 5000;
-        } elseif ($numWinners <= 5) {
-            return 1000;
-        } elseif ($numWinners <= 10) {
-            return 750;  
-        } elseif ($numWinners <= 15) {
-            return 600;  
-        } elseif ($numWinners <= 20) {
-            return 500;
-        } else {
-            return null;
-        }
-    }
 }
